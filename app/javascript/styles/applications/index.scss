@@ -1,0 +1,89 @@
+body {
+  // padding-top: 56px;
+
+}
+.slj {
+  &-header {
+    &-index {
+      padding-top: 300px;
+      padding-bottom: 300px;
+    }
+    &-title{
+      font-size: 36px;
+      font-weight: bold;
+    }
+    &-summary {
+      font-size: 24px;
+
+    }
+  }
+
+  .marketing-card {
+    width: 230px;
+    height: 170px;
+    background: #FFFFFF;
+    border-radius: 6px;
+    padding: 40px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+  } 
+  
+}
+
+
+.bg-dark-blue {
+  background-color:#1F53E4;
+  box-shadow: 0 0 0 1px #1F53E4;
+}
+
+.carousel-item {
+  height: 65vh;
+  min-height: 300px;
+  background: no-repeat center center scroll;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.portfolio-item {
+  margin-bottom: 30px;
+}
+
+.bg-color {
+  background-color: #F7FBFF;
+}
+
+.main-footer {
+  font-weight: 200;
+  background-color: #2E3033;
+
+  h5{
+    color: #fff;
+  }
+
+  a{
+    color: #fff;
+  }
+
+  li{
+    color: #fff;
+  }
+
+  .footer-copyright{
+    color:#fff;
+  }
+}
+
+.col-login {
+  max-width: 24rem;
+}
+
+.form-footer{
+  input {
+    background-color:#1F53E4;
+    color:#fff;
+  }
+}

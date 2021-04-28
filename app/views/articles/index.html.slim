@@ -1,0 +1,60 @@
+= search_form_for @q, url:app_articles_path, method: 'get', wrapper: :horizontal_form, html: { class: "card" } do |f|
+  .card-body
+    .row
+      .col-2
+        = f.search_field :author_cont, required: false, placeholder: "作者", class: "form-control"
+      .col-2
+        = f.search_field :title_cont, required: false, placeholder: "标题名称", class: "form-control"
+      .col-2
+        = f.input_field :created_at_gt, required: false, placeholder: "开始时间", class: "form-control start_date"
+      .col-2
+        = f.input_field :created_at_lt, required: false, placeholder: "结束时间", class: "form-control end_date"
+      .col-2
+        = f.input_field :state_in, as: :check_boxes, collection: Article.states, :label_method => lambda { |state| t("activerecord.enums.article.state.#{state[0]}") }
+      .col-2
+        = f.input :page, as: :hidden, input_html: {value: params[:page]}
+        = f.button :submit, value: "查询", data: { disable_with: "查询中..." }, class: "btn btn-primary"
+
+.card
+  .card-header
+    .card-title
+      = link_to "创建", new_app_article_path, class: "btn btn-primary"
+  .table-responsive
+    table.table.card-table.table-vcenter.datatable
+      thead
+        tr
+          th 作者
+          th 标题
+          th 摘要
+          th 状态
+          th 创建时间
+          th 操作
+      tbody
+        - @articles.each do | article |
+          tr
+            td
+              = article.author
+            td
+              = truncate(article.title, :length => 20) 
+            td
+              = truncate(article.summary, :length => 20) 
+            td
+              = article.state_text
+            td
+              = article.created_at.strftime('%Y-%m-%d %H:%M')
+            td.
+              a.btn.btn-link.btn-sm[href="#{edit_app_article_path(@current_app,article) }"] 
+                | 编辑
+              a.btn.btn-link.btn-sm[href="#{app_article_path(@current_app,article) }" target="_blank"]
+                | 预览
+              - unless article.published?
+                = link_to '发布', published_app_article_path(@current_app, article), method: :post, class: 'btn btn-sm btn-link'
+              - if article.published?
+                = link_to '作废', overdue_app_article_path(@current_app, article), method: :post, class: 'btn btn-sm btn-link'
+              = link_to '删除', app_article_path(@current_app, article), method: :delete, data: { confirm: 'Are you sure?' } , class: 'btn btn-sm btn-link text-danger'
+
+           
+  .card-footer.d-flex.align-items-center
+    p.m-0.text-muted
+      | 共计 #{@count}  条
+    = paginate @articles

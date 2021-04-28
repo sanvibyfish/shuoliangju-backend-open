@@ -1,0 +1,19 @@
+admin:
+  emails: 
+    - sanvibyfish@gmail.com
+
+wechat:
+  app_id: wx9b1a23ddf349c711
+  app_secret: 14656cd052e4330a29ed6331e6217cff
+  template:
+    news: MQQk6_8CyvcfB0mLwnCBpaf1OTyXg4I_9tZH1aY8JFE
+    like: csvIUPkOmE8SsBJP-gCjOupXgGX8xryCtX8u11HhwxY
+    reply: OhRg8zkKXuGIQRvprrKDY581hAaKhFbJDWf63bEsQSE
+    comment: gYk1UwD25L_LoXRoYPJaBwRP2d5ybnzYhz8LBIg_OYI
+  miniprogram_state: "developer"
+
+app_config:
+  own_app_id: 52
+  help_article_id: 29
+  feedback_article_id: 30
+

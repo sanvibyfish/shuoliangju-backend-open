@@ -1,0 +1,61 @@
+"zh-CN":
+  error:
+    content_invaild: 内容不能违反平台协议，相关法律法规和政策内容，请重新编辑
+  activerecord:
+    enums:
+      section:
+        role:
+          normal: 普通用户
+          admin: 管理员
+      user:
+        state:
+          blocked: 禁用用户
+          normal: 普通用户
+          admin: 管理员
+      article:
+        state:
+          draft: 草稿
+          published: 已发布
+          overdue: 作废
+      report:
+        state:
+          undisposed: 未处理
+          disposed: 已处理
+        action:
+          none: 未操作
+          ignore: 已忽略
+          delete: 已删除
+          ban: 已隐藏
+          pass: 已通过
+      state:
+        ban: 已隐藏
+        active: 正常
+      grade:
+        normal: 普通帖子 
+        excellent: 精华帖子
+    models:
+      app: 社区
+      section: 板块
+      article: 文章
+      post: 帖子
+      user: 用户
+    attributes:
+      app:
+        name: "社区名称"
+        logo: "社区图标"
+        wechat_app_id: 微信app_id
+        wechat_app_secret: 微信app_secret
+        summary: 描述
+        logo: 封面图
+      user:
+        nick_name: "昵称"
+        id: "用户ID"
+      section:
+        name: 名称
+        icon: 封面图
+      article:
+        title: 标题
+        summary: 摘要
+        content: 内容
+        author: 作者
+        image: 封面图

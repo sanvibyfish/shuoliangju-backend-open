@@ -1,0 +1,23 @@
+.apps-list {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    &-icon{
+        background-color: #a8a8a8;
+        border-radius: 50%;
+        width: 80px;
+        height: 80px;
+    }
+
+    &-text {
+        margin-left: 32px;
+    }
+
+    &-actions{
+        margin-left: auto;
+        a {
+            margin: 8px;
+        }
+    }
+}

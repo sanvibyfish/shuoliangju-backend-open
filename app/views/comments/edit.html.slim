@@ -1,0 +1,15 @@
+= simple_form_for comment_path(@comment.app, @comment), html: { class: "card" } do |form|
+ = form.simple_fields_for(@comment) do |f|
+  .card-body
+    .card-title 修改帖子
+    .row
+      = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
+          = f.input :body
+          = f.input :image_url
+          = f.association :commentable
+          = f.input :deleted_at
+          = f.association :user
+          = f.association :app
+  .card-footer.text-right
+    = f.button :submit
+

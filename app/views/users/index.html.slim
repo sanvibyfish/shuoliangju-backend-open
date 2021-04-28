@@ -1,0 +1,56 @@
+= search_form_for @q, url:app_users_path, method: 'get', wrapper: :horizontal_form, html: { class: "card" } do |f|
+    .card-body
+      .row
+        .col-2
+          = f.search_field :nick_name_cont, required: false, placeholder: "用户昵称", class: "form-control"
+        .col-2
+          = f.input_field :id_eq, required: false, placeholder: "用户ID", class: "form-control"
+        .col-2
+          = f.input_field :state_in, as: :check_boxes, collection: User.states, :label_method => lambda { |state| t("activerecord.enums.user.state.#{state[0]}") }
+        .col-2
+          = f.input :page, as: :hidden, input_html: {value: params[:page]}
+          = f.button :submit, value: "查询", data: { disable_with: "查询中..." }, class: "btn btn-primary"
+.card
+  .table-responsive
+    table.table.card-table.table-vcenter.datatable
+      thead
+        tr
+          th 用户ID
+          th 昵称
+          th 手机号
+          th 用户状态
+          th 创建时间
+          th 操作
+      tbody
+        - @users.each do | user |
+          tr
+            td
+              = user.id
+            td
+              = user.nick_name
+            td
+              = user.cellphone
+            td
+              = user.state_text
+            td
+              = user.created_at.strftime('%Y-%m-%d %H:%M')
+            td
+              a.btn.btn-sm.btn-link.dropdown-toggle[href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"]
+                | 更多
+              .dropdown-menu.dropdown-menu-right
+                - if user.blocked?
+                  = link_to '取消禁用', unban_app_user_path(@current_app, user), method: :post,  class: 'dropdown-item'
+                - else 
+                  = link_to '禁用', ban_app_user_path(@current_app, user), method: :post,  class: 'dropdown-item'
+
+                - if user.admin?
+                  = link_to '取消管理员', unset_admin_app_user_path(@current_app, user), method: :post,  class: 'dropdown-item'
+                - else 
+                  = link_to '设为管理员', set_admin_app_user_path(@current_app, user), method: :post,  class: 'dropdown-item'
+                  
+                = link_to '删除', app_user_path(@current_app, user), method: :delete, data: { confirm: 'Are you sure?' } , class: 'dropdown-item'
+
+  .card-footer.d-flex.align-items-center
+    p.m-0.text-muted
+      | 共计 #{@count}  条
+    = paginate @users

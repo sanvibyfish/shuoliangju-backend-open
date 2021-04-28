@@ -1,0 +1,14 @@
+= simple_form_for(@comment) do |f|
+  = f.error_notification
+  = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
+
+  .form-inputs
+    = f.input :body
+    = f.input :image_url
+    = f.association :commentable
+    = f.input :deleted_at
+    = f.association :user
+    = f.association :app
+
+  .form-actions
+    = f.button :submit

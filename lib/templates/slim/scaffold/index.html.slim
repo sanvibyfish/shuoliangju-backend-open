@@ -1,0 +1,37 @@
+= simple_form_for app_<%= plural_table_name %>_path, method: 'get', wrapper: :horizontal_form, html: { class: "card" } do |f|
+    .card-body
+      .row
+          = f.input :q, :label => "关键字", input_html: { name: "q" }, required: false
+          .col-sm-6.col-md-3.align-self-center
+            .md-2
+              = f.input :page, as: :hidden, input_html: {value: params[:page]}
+              = f.button :submit, value: "搜索", data: { disable_with: "搜索中..." } 
+.card
+  .table-responsive
+    table.table.card-table.table-vcenter.datatable
+      thead
+        tr
+        <%- for attribute in attributes -%>
+          th <%= attribute.human_name %>
+        <%- end -%>
+          th 操作
+      tbody
+        - @<%= plural_table_name %>.each do | <%= singular_table_name %> |
+          tr
+            <%- for attribute in attributes -%>
+            td
+              = <%= singular_table_name %>.<%= attribute.name %>
+            <%- end -%>
+            td.text-right
+              a.btn.btn-link.btn-sm[href="#{edit_<%= singular_table_name %>_path(<%= singular_table_name %>.app,<%= singular_table_name %>) }"]
+                | 编辑
+              = link_to '删除', <%= singular_table_name %>_path(<%= singular_table_name %>.app, <%= singular_table_name %>), method: :delete, data: { confirm: 'Are you sure?' } , class: 'btn btn-sm btn-link text-danger'
+              a.btn.btn-sm.btn-link.dropdown-toggle[href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"]
+                | 更多
+              .dropdown-menu.dropdown-menu-right
+                a.dropdown-item[href="#"]
+                  |  test
+  .card-footer.d-flex.align-items-center
+    p.m-0.text-muted
+      | 共计 #{@count}  条
+    = paginate @<%= plural_table_name %>

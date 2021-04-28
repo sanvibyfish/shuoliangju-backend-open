@@ -1,0 +1,33 @@
+.page-header
+  .row.align-items-center
+    .col-auto.ml-auto.d-print-none
+      a.btn.btn-primary.ml-3.d-none.d-sm-inline-block[href="#{new_app_path}"]
+        svg.icon[xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"]
+          line[x1="12" y1="5" x2="12" y2="19"]
+          line[x1="5" y1="12" x2="19" y2="12"]
+        |  创建新社区
+- unless @apps.blank?
+  .row.row-cards
+    .col-12
+      - @apps.each do | app |
+        .card
+          .card-body.apps-list
+            - if app.logo_url.present?
+              img src="#{app.logo_url}" class="apps-list-icon"
+            - else
+              img.icon
+            .apps-list-text
+              h5.card-title 
+                = app.name
+              p.card-text
+                = app.created_at
+            .apps-list-actions
+              a.btn.btn-secondary[href="#{app_posts_path(app)}"] 管理
+              a.btn.btn-secondary 小程序码
+              a.btn.btn-secondary[data-toggle="dropdown" aria-expanded="false"] 更多
+              .dropdown-menu.dropdown-menu-right
+                = link_to '删除', '#', method: :delete, data: { confirm: '确认删除吗?' } , class: 'dropdown-item'
+      .text-left.text-muted
+        h3 说明:
+        p 1.最多只能创建3个社区
+        p 2.一切违反微信规则的行为，如诱导分享、集赞、色情、政治、赌博、毒品等信息，会导致论坛自动被封，创建者将不能再创建任何社区！

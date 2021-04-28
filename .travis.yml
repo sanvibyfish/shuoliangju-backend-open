@@ -1,0 +1,14 @@
+language: ruby
+rvm:
+- 2.6.5
+install: bundle install
+services:
+  - mysql
+  - redis-server
+before_script:
+  - "cp ./.travis.storage.yml ./config/storage.yml"
+  - "cp ./.travis.database.yml ./config/database.yml"
+  - bundle exec rails db:create RAILS_ENV=test
+script:
+  - bundle exec rake db:migrate:reset RAILS_ENV=test
+  - bundle exec rspec

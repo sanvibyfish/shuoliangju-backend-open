@@ -1,0 +1,16 @@
+
+= simple_form_for @post, url: app_post_path(@post.app, @post), method: :put, html: { class: "card" } do |f|
+  .card-body
+    .card-title 修改帖子
+    .row
+      = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
+      = f.input :id,  disabled: true
+      = f.input :body, as: :text, :input_html => { :cols => 5, :rows => 10 } 
+      - if @post.images.attached?
+        .col-md-8
+            .mb-4
+              label.form-label image
+              - @post.images_url.each do | image_url|
+                img.post-image[src="#{image_thumb_url(image_url)}"]
+  .card-footer.text-right
+    = f.button :submit

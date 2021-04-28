@@ -1,0 +1,34 @@
+.page-header
+  = link_to comments_path, class: 'btn btn-default' do 
+    span.glyphicon.glyphicon-list-alt
+    |  Back 
+  = link_to edit_comment_path(@comment), class: 'btn btn-primary' do 
+    span.glyphicon.glyphicon-pencil
+    |  Edit 
+  h1
+    | Show comment
+dl.dl-horizontal
+  dt
+    | Body:
+  dd
+    = @comment.body
+  dt
+    | Image url:
+  dd
+    = @comment.image_url
+  dt
+    | Commentable:
+  dd
+    = @comment.commentable
+  dt
+    | Deleted at:
+  dd
+    = @comment.deleted_at
+  dt
+    | User:
+  dd
+    = @comment.user
+  dt
+    | App:
+  dd
+    = @comment.app

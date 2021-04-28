@@ -1,0 +1,10 @@
+aliyun:
+  service: 
+  access_key_id: 
+  access_key_secret: 
+  bucket: 
+  endpoint: 
+  # path prefix, default: /
+  path: /
+  # Bucket public: true/false, default: true, for generate public/private URL.
+  public: true

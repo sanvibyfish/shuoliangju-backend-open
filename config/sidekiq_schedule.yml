@@ -1,0 +1,3 @@
+DailyReportWorker:
+  cron: '* 14 * * * *'
+  class: DailyReportWorker

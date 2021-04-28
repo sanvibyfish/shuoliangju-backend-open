@@ -1,0 +1,1 @@
+json.(@attachment,:url, :blob_id)

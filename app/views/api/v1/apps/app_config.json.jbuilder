@@ -1,0 +1,1 @@
+json.(@config,:help_url,:feedback_url,:apply_url)

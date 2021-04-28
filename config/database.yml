@@ -1,0 +1,42 @@
+default: &default
+  adapter: mysql2
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  timeout: 5000
+  host: <%= ENV['MYSQL_ADDRESS'] || "127.0.0.1" %>
+  port:  <%= ENV['MYSQL_PORT'] || 3306 %>
+  username:  <%= ENV['MYSQL_USERNAME'] || "root" %>
+  password:  <%= ENV['MYSQL_PASSWORD'] || ""%>
+  encoding: utf8mb4
+
+development:
+  <<: *default
+  database:  <%= ENV['DATABASE_NAME'] || "shuoliangju-dev" %>
+  # 下面是本地调试远程库使用，需要做隧道连接ssh -Ng -L 3307:shuoliangju.cn:3307 root@shuoliangju.cn
+  # database: shuoliangju-staging
+  # host: 127.0.0.1
+  # port: 3307
+  # username: shuoliangju
+  # password: VuDs7TVsRVF9vL5
+
+# Warning: The database defined as "test" will be erased and
+# re-generated from your development database when you run "rake".
+# Do not set this db to the same as development or production.
+test:
+  <<: *default
+  database: shuoliangju-test
+
+staging:
+  <<: *default
+  database: shuoliangju-staging
+  host: <%= ENV['MYSQL_ADDRESS'] %>
+  username: <%= ENV['MYSQL_USERNAME'] %>
+  password: <%= ENV['MYSQL_PASSWORD'] %>
+
+
+production:
+  <<: *default
+  database: shuoliangju
+  host: <%= ENV['MYSQL_ADDRESS'] %>
+  username: <%= ENV['MYSQL_USERNAME'] %>
+  password: <%= ENV['MYSQL_PASSWORD'] %>
+  

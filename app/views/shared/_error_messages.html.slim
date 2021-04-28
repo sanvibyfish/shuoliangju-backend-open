@@ -1,0 +1,15 @@
+- if target.errors.any?
+  .col-md-8
+    .mb-4
+      .alert.alert-danger.alert-dismissible[role="alert"]
+        div
+          strong
+            | 有 
+            = target.errors.count
+            |  处问题导致无法提交:
+          ul
+            - target.errors.full_messages.each do |msg|
+              li
+                = msg
+        a.close[data-dismiss="alert" href="#"]
+          | ×

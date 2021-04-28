@@ -1,0 +1,17 @@
+= simple_form_for [@app,@section], html: { class: "card" } do |f|
+  .card-body
+    .card-title 
+      = @title
+    .row
+      .col-6
+        = render "/shared/error_messages", target: @section
+        = f.input :name
+        = f.input :summary
+        = f.input :role, as: :radio_buttons, collection:  Section.roles, :label_method => lambda { |role| t("activerecord.enums.section.role.#{role[0]}") },input_html:{class:"form-check-inline"},value_method: :first
+        .form-group
+          = f.label :icon, class:"form-label"
+          = f.input_field :icon,as: :file
+          
+          = image_tag @section.icon_url, size: "64" if @section.icon_url
+  .card-footer.text-right
+    = f.button :submit, class:"btn btn-primary"

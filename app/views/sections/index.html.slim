@@ -1,0 +1,44 @@
+= search_form_for @q, url:app_sections_path, method: 'get', wrapper: :horizontal_form, html: { class: "card" } do |f|
+  .card-body
+    .row
+      .col-2
+        = f.search_field :name_cont, required: false, placeholder: "板块名称", class: "form-control"
+      .col-2
+        = f.input_field :created_at_gt, required: false, placeholder: "开始时间", class: "form-control start_date"
+      .col-2
+        = f.input_field :created_at_lt, required: false, placeholder: "结束时间", class: "form-control end_date"
+      .col-2
+        = f.input :page, as: :hidden, input_html: {value: params[:page]}
+        = f.button :submit, value: "查询", data: { disable_with: "查询中..." }, class: "btn btn-primary"
+.card
+  .card-header
+    .card-title
+      = link_to "创建", new_app_section_path, class: "btn btn-primary"
+  .table-responsive
+    table.table.card-table.table-vcenter.datatable
+      thead
+        tr
+          th 名称
+          th 图标
+          th 介绍
+          th 权限
+          th 操作
+      tbody
+        - @sections.each do | section |
+          tr
+            td 
+              = section.name
+            td
+              = image_tag section.icon_url, size: "64" if section.icon_url
+            td
+              = section.summary
+            td
+              = section.role_text
+            td
+              a.btn.btn-link.btn-sm[href="#{edit_app_section_path(@current_app,section) }"]
+                | 编辑
+              = link_to '删除', app_section_path(@current_app, section), method: :delete, data: { confirm: 'Are you sure?' } , class: 'btn btn-sm btn-link text-danger'
+  .card-footer.d-flex.align-items-center
+    p.m-0.text-muted
+      | 共计 #{@count}  条
+    = paginate @sections

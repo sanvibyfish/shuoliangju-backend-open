@@ -1,0 +1,17 @@
+= simple_form_for @app, html: { class: "card" } do |f|
+  .card-body
+    .card-title 
+      = @title
+    .row
+      .col-6
+        = render "/shared/error_messages", target: @app
+        = f.input :name
+        = f.label :logo, class:"form-label"
+        = f.input_field :logo,as: :file
+        = image_tag @app.logo_url, size: "64" if @app.logo_url
+        - if @detail
+          = f.input :summary  
+          = f.input :wechat_app_id
+          = f.input :wechat_app_secret
+  .card-footer.text-right
+    = f.button :submit, class:"btn btn-primary"

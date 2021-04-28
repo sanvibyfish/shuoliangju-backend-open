@@ -1,0 +1,57 @@
+= search_form_for @q, url:app_reports_path, method: 'get', wrapper: :horizontal_form, html: { class: "card" } do |f|
+    .card-body
+      .row
+        .col-2
+          = f.search_field :user_nick_name_cont, required: false, placeholder: "举报人昵称", class: "form-control"
+        .col-2
+          = f.input_field :state_in, as: :check_boxes, collection: Report.states, :label_method => lambda { |state| t("activerecord.enums.report.state.#{state[0]}") }
+        .col-2
+          = f.input_field :action_in, as: :check_boxes, collection: Report.actions, :label_method => lambda { |action| t("activerecord.enums.report.action.#{action[0]}") }
+        .col-2
+          = f.input :page, as: :hidden, input_html: {value: params[:page]}
+          = f.button :submit, value: "查询", data: { disable_with: "查询中..." }, class: "btn btn-primary"
+
+.card
+  .table-responsive
+    table.table.card-table.table-vcenter.datatable
+      thead
+        tr
+          th 举报人
+          th 举报类型
+          th 帖子内容 / 用户昵称
+          th 创建时间
+          th 动作
+          th 状态
+          th 操作
+      tbody
+        - @reports.each do | report |
+          tr
+            td
+              = report.user.nick_name
+            td
+              = I18n.t("activerecord.models.#{report.reportable_type.downcase}")
+            td
+              - if report.reportable_type == "Post"
+                - if report.reportable.present?
+                  = report.reportable.body
+              - elsif report.reportable_type == "User"
+                = report.reportable.nick_name
+            td
+              = report.created_at.strftime('%Y-%m-%d %H:%M')
+            td
+              = I18n.t("activerecord.enums.report.action.#{report.action}")
+            td
+              = I18n.t("activerecord.enums.report.state.#{report.state}")
+            td
+              - unless report.disposed?
+                = link_to '忽略', ignore_app_report_path(@current_app, report), method: :post, class: 'btn btn-sm btn-link'
+                - if report.reportable_type == "Post"
+                  = link_to '删除帖子',  destroy_post_app_report_path(@current_app, report), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-link text-danger'
+                  = link_to '隐藏', ban_post_app_report_path(@current_app, report), method: :post, class: 'btn btn-sm btn-link'  
+                - elsif report.reportable_type == "User"
+                  = link_to '禁用用户', ban_user_app_report_path(@current_app, report), method: :post, class: 'btn btn-sm btn-link'
+  .card-footer.d-flex.align-items-center
+    p.m-0.text-muted
+      | 共计 #{@count}  条
+    = paginate @reports
+  

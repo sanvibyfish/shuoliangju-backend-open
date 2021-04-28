@@ -1,0 +1,24 @@
+doctype html
+html
+  head
+    = csrf_meta_tags
+    = csp_meta_tag
+    meta[charset="utf-8"]
+    meta[name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"]
+    meta[name="description" content=""]
+    meta[name="author" content=""]
+    title
+      = @article.title
+    = stylesheet_pack_tag 'article', media: 'all'
+    = javascript_pack_tag 'article'
+  body.container.mx-auto.flex.flex-col
+    .text-3xl.pt-16
+      = @article.title
+    .flex.flex-row.text-gray-500.pt-8
+      .text-sm
+        = @article.author
+      .text-sm.pl-4
+        =  @article.created_at.strftime('%Y-%m-%d %H:%M')
+    .pt-8
+      = raw(@article.content)
+

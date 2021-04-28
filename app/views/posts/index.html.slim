@@ -1,0 +1,71 @@
+= search_form_for @q, url:app_posts_path, method: 'get', wrapper: :horizontal_form, html: { class: "card" } do |f|
+    .card-body
+      .row
+        .col-2
+          = f.search_field :user_nick_name_cont, required: false, placeholder: "用户昵称", class: "form-control"
+        .col-2
+          = f.input_field :body_cont, required: false, placeholder: "帖子内容", class: "form-control"
+        .col-2
+          = f.input_field :created_at_gt, required: false, placeholder: "开始时间", class: "form-control start_date"
+        .col-2
+          = f.input_field :created_at_lt, required: false, placeholder: "结束时间", class: "form-control end_date"
+        .col-2
+          = f.input :grade_eq, as: :boolean, checked_value: Post.grades[:excellent], unchecked_value: Post.grades[:normal], :label => "精华" 
+          = f.input :top_eq, as: :boolean, checked_value: true, unchecked_value: false, :label => "置顶" 
+          = f.input :state_eq, as: :boolean, checked_value:  Post.states[:ban], unchecked_value:  Post.states[:active], :label => "隐藏" 
+        .col-2
+          = f.input :page, as: :hidden, input_html: {value: params[:page]}
+          = f.button :submit, value: "查询", data: { disable_with: "查询中..." }, class: "btn btn-primary"
+
+
+.card
+  .table-responsive
+    table.table.card-table.table-vcenter.datatable
+      thead
+        tr
+          th 用户昵称
+          th 帖子内容
+          th 点赞数据
+          th 评论数据
+          th 状态
+          th 创建时间
+          th 操作
+      tbody
+        - @posts.each do | post |
+          tr
+            td
+              = post.user.nick_name
+            td
+              = truncate(post.body, :length => 20)
+            td
+              = post.likes_count
+            td
+              = post.comments.count
+            td
+              | #{post.grade_text} / #{post.state_text} / #{post.top_text}
+            td
+              = post.created_at.strftime('%Y-%m-%d %H:%M')
+            td
+              a.btn.btn-sm.btn-link.dropdown-toggle[href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="dropdownMenuButton-#{post.id}"]
+                | 更多
+              .dropdown-menu.dropdown-menu-right[aria-labelledby="dropdownMenuButton-#{post.id}"]
+              
+                - if post.top?
+                  = link_to '取消置顶', untop_app_post_path(@current_app, post), method: :post,  class: 'dropdown-item'
+                - else 
+                  = link_to '置顶', top_app_post_path(@current_app, post), method: :post,  class: 'dropdown-item'
+
+                - unless post.excellent?
+                  = link_to '加精', excellent_app_post_path(@current_app, post), method: :post,  class: 'dropdown-item'
+                - else 
+                  = link_to '取消加精', unexcellent_app_post_path(@current_app, post), method: :post,  class: 'dropdown-item'
+
+                - if post.ban?
+                  = link_to '取消隐藏', unban_app_post_path(@current_app, post), method: :post,  class: 'dropdown-item'
+                - else 
+                  = link_to '隐藏', ban_app_post_path(@current_app, post), method: :post,  class: 'dropdown-item'
+                = link_to '删除', app_post_path(@current_app, post), method: :delete, data: { confirm: 'Are you sure?' },  class: 'dropdown-item'
+  .card-footer.d-flex.align-items-center
+    p.m-0.text-muted
+      | 共计 #{@count}  条
+    = paginate @posts

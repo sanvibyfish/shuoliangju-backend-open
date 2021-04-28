@@ -1,0 +1,12 @@
+= simple_form_for <%= singular_table_name %>_path(@<%= singular_table_name %>.app, @<%= singular_table_name %>), html: { class: "card" } do |form|
+ = form.simple_fields_for(@<%= singular_table_name %>) do |f|
+  .card-body
+    .card-title 修改帖子
+    .row
+      = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
+      <%- attributes.each do |attribute| -%>
+          = f.<%= attribute.reference? ? :association : :input %> :<%= attribute.name %>
+      <%- end -%>
+  .card-footer.text-right
+    = f.button :submit
+

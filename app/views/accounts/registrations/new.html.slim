@@ -1,0 +1,29 @@
+.page
+  .page-single
+    .container
+      .row
+        .col.col-login.mx-auto
+          .text-center.mb-6
+            img.h-6[src="./demo/brand/tabler.svg" alt=""]
+          = simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html:{ class: "card" }) do |f|
+            .card-body.p-6
+              .card-title
+                = t(".sign_up")
+              = render "/shared/form_error_messages", target: resource
+              .form-group
+                label.form-label
+                  | 邮箱
+                = f.input_field :email,required: false, autofocus: true, input_html: { autocomplete: "email"}, class: 'form-control' 
+              .form-group
+                label.form-label
+                  |  密码 
+                = f.input_field :password, required: true,hint: (t('devise.shared.minimum_password_length', count: @minimum_password_length) if @minimum_password_length), input_html: { autocomplete: "new-password" }, class: 'form-control' 
+              .form-group
+                label.form-label
+                  |  再次输入密码 
+                = f.input_field :password_confirmation, required: true, input_html: { autocomplete: "new-password" }, class: 'form-control' 
+              .form-footer
+                = f.submit "注册", class: "btn btn-block"
+          .text-center.text-muted
+            | 有账户? 
+            = link_to "登录", new_session_path(resource_name), class: "login_link"

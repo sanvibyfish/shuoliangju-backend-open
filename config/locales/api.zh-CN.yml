@@ -1,0 +1,43 @@
+zh-CN:
+  api:
+    message:
+      wechat:
+        session_key_not_found: '登录失败，请重新登录'
+      system:
+        remote_call_error: '远程调用异常'
+      record:
+        not_unique: '数据已存在'
+      params:
+        missing_params: '缺少参数'
+      app:
+        success: '圈子创建成功'
+        update_success: '更新成功'
+      article:
+        success: '文章创建成功'
+        destroy_success: '文章删除成功'
+      product:
+        success: '创建产品图册成功'
+        destroy_success: '产品图册删除成功'
+      group:
+        success: '群信息创建成功'
+        destroy_success: '群信息删除成功'
+      post:
+        success: '帖子创建成功'
+        destroy_success: '帖子删除成功'
+        body_invalid: '内容不能违反平台协议，相关法律法规和政策内容，请重新编辑'
+        image_invalid: '图片内容不能违反平台协议，相关法律法规和政策内容，请重新编辑'
+      comment:
+        success: '评论创建成功'
+        nout_found: '无法找到评论'
+        destroy_success: '评论删除成功'
+      user:
+        reigster_success: '账号注册成功'
+        update_success: '更新成功'
+        presenced: '账号已存在'
+        not_found: '无法找到该用户'
+        auth_fail: '验证不通过，请检查账号密码是否正确'
+      permission:
+        access_denied: 没有该操作权限
+      token:
+        expired: '登录信息已失效，请重新登录'
+        invalid: '登录信息无效，请重新登录'

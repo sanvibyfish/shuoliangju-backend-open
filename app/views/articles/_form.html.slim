@@ -1,0 +1,26 @@
+= content_for :javascripts
+  script type="text/javascript" src="#{asset_pack_path('editor.js')}" data-turbolinks-track='reload'
+  link href="#{asset_pack_path('editor.css')}" rel="stylesheet" data-turbolinks-track='reload'
+
+= simple_form_for [@app,@article], html: { class: "card" } do |f|
+  .card-body
+    .card-title 
+      = @title
+    .row
+      .col-md6
+        = render "/shared/error_messages", target: @article
+        = f.input :title
+        .form-group
+          = f.association :user, as: :radio_buttons, collection: admins,label_method: :nick_name, input_html:{class:"form-check-inline"}
+        = f.input :summary
+        .form-group
+          = f.label :content, class:"form-label"
+          #article_content
+        = f.hidden_field :content, id: "hidden_content"
+        .form-group
+          = f.label :image, class:"form-label"
+          = f.input_field :image,as: :file
+          = image_tag @article.image_url, size: "64" if @article.image_url
+  .card-footer.text-right
+    = f.button :submit, class:"btn btn-primary"
+    

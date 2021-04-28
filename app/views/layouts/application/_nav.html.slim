@@ -1,0 +1,19 @@
+nav#navbar-secondary.navbar.navbar-light.navbar-secondary.navbar-expand
+  .container
+    a.navbar-brand.navbar-brand-autodark.d-none-navbar-vertical[href="#"]
+      | 说两句 - beta
+    ul.navbar-nav.ml-auto
+      li.nav-item.dropdown
+        a#navbarDropdown.nav-link.dropdown-toggle[href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"]
+          = current_account.email
+        .dropdown-menu.dropdown-menu-right.dropdown-menu-arrow
+          a.dropdown-item[href="#"]
+            |  我的模板 
+          a.dropdown-item[href="#"]
+            |  个人中心
+          a.dropdown-item[href="#"]
+            |  更换手机
+          a.dropdown-item[href="#"]
+            |  修改密码
+          .dropdown-divider
+          = link_to "登出账号", destroy_account_session_path, :method => :delete, class: "dropdown-item"

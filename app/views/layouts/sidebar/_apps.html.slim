@@ -1,0 +1,87 @@
+nav#navbar-primary.navbar.navbar-expand-lg.navbar-vertical.navbar-light.navbar-primary
+  .container
+    a.navbar-brand.navbar-brand-autodark.d-none-navbar-horizontal[href="#"]
+      | 说两句 - beta
+    .navbar-collapse.collapse
+      h6.navbar-heading.mt-4
+        | 社区管理
+      ul.navbar-nav
+        = nav_item controller: 'posts', html_options: {class: "nav-item"} do
+          = nav_link_to app_posts_path(@app) ,class: "nav-link" do
+            span.nav-link-icon
+            span.nav-link-title
+              | 帖子管理
+        = nav_item controller: 'comments', html_options: {class: "nav-item"} do
+          = nav_link_to app_comments_path(@app) ,class: "nav-link" do
+            span.nav-link-icon
+            span.nav-link-title
+              | 评论管理
+        = nav_item controller: 'sections', html_options: {class: "nav-item"} do
+          = nav_link_to app_sections_path(@app) ,class: "nav-link" do
+            span.nav-link-icon
+            span.nav-link-title
+              | 板块管理
+        = nav_item controller: 'articles', html_options: {class: "nav-item"} do
+          = nav_link_to app_articles_path(@app) ,class: "nav-link" do
+            span.nav-link-icon
+            span.nav-link-title
+              | 文章管理
+        = nav_item controller: 'reports', html_options: {class: "nav-item"} do
+          = nav_link_to app_reports_path(@app) ,class: "nav-link" do
+            span.nav-link-icon
+            span.nav-link-title
+              | 举报管理
+        = nav_item controller: 'users', html_options: {class: "nav-item"} do
+          = nav_link_to app_users_path(@app) ,class: "nav-link" do
+            span.nav-link-icon
+            span.nav-link-title
+              | 用户管理
+      h6.navbar-heading.mt-4
+        | 社区装修
+      ul.navbar-nav
+        li.nav-item
+          a.nav-link[href="#"]
+            span.nav-link-icon
+            span.nav-link-title
+              | 小程序装修
+        li.nav-item
+          a.nav-link[href="#"]
+            span.nav-link-icon
+            span.nav-link-title
+              | 自定义页面
+      h6.navbar-heading.mt-4
+        | 后台管理
+      ul.navbar-nav
+        li.nav-item
+          a.nav-link[href="#"]
+            span.nav-link-icon
+            span.nav-link-title
+              | 员工操作
+        li.nav-item
+          a.nav-link[href="#"]
+            span.nav-link-icon
+            span.nav-link-title
+              | 操作日志
+      h6.navbar-heading.mt-4
+        | 小程序设置
+      ul.navbar-nav
+        = nav_item controller: 'apps', html_options: {class: "nav-item"} do
+          = nav_link_to edit_app_path(@app) ,class: "nav-link" do
+            span.nav-link-icon
+            span.nav-link-title
+              | 基本设置
+        li.nav-item
+          a.nav-link[href="#"]
+            span.nav-link-icon
+            span.nav-link-title
+              | 外观设置
+        li.nav-item
+          a.nav-link[href="#"]
+            span.nav-link-icon
+            span.nav-link-title
+              | 微信支付
+        li.nav-item
+          a.nav-link[href="#"]
+            span.nav-link-icon
+            span.nav-link-title
+              | 服务中心

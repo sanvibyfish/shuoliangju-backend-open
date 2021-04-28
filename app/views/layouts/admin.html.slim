@@ -1,0 +1,50 @@
+doctype html
+html
+  head
+    meta content=("text/html; charset=UTF-8") http-equiv="Content-Type" /
+    title ShuoliangjuBackend
+    = csrf_meta_tags
+    = csp_meta_tag
+    meta charset="utf-8" /
+    meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport" /
+    /! SEO Meta Tags
+    meta content=("Tivo is a HTML landing page template built with Bootstrap to help you crate engaging presentations for SaaS apps and convert visitors into users.") name="description" /
+    meta content="Inovatik" name="author" /
+    /! OG Meta Tags to improve the way the post looks when you share the page on LinkedIn, Facebook, Google+
+    meta content="" property="og:site_name" /
+    /! website name
+    meta content="" property="og:site" /
+    /! website link
+    meta content="" property="og:title" /
+    /! title shown in the actual shared post
+    meta content="" property="og:description" /
+    /! description shown in the actual shared post
+    meta content="" property="og:image" /
+    /! image link, make sure it's jpg
+    meta content="" property="og:url" /
+    /! where do you want your post to link to
+    meta content="article" property="og:type" /
+    /! Website Title
+    title Tivo - SaaS App HTML Landing Page Template
+    /! Favicon
+    link href="images/favicon.png" rel="icon" /
+    = stylesheet_pack_tag 'accounts', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_pack_tag 'accounts', 'data-turbolinks-track': 'reload'
+  body.app.sidebar-show
+    = render "layouts/application/nav"
+    .app-body
+      = render "layouts/sidebar/#{@_sidebar_name}"
+      main.main
+        = render "layouts/application/breadcrumb"
+        = yield
+    footer.app-footer
+      div
+        a[href="https://coreui.io"]
+          | CoreUI
+        span
+          | © 2018 creativeLabs.
+      .ml-auto
+        span
+          | Powered by
+        a[href="https://coreui.io"]
+          | CoreUI

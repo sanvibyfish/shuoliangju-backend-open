@@ -1,0 +1,27 @@
+.sidebar
+  nav.sidebar-nav
+    ul.nav
+      = nav_item controller: 'admin/home', html_options: {class: "nav-item"} do
+        = nav_link_to admin_root_path ,class: "nav-link" do
+          i.nav-icon.fas.fa-user-circle
+          | Home
+      li.nav-title
+        | Theme
+      = nav_item controller: 'admin/accounts', html_options: {class: "nav-item"} do
+        = nav_link_to admin_accounts_path, class: "nav-link" do
+          i.nav-icon.fas.fa-user-circle
+          | Accounts
+      li.nav-item
+        a.nav-link[href="typography.html"]
+          i.nav-icon.icon-pencil
+          |  Typograhy
+      li.nav-item.mt-auto
+        a.nav-link.nav-link-success[href="https://coreui.io" target="_top"]
+          i.nav-icon.icon-cloud-download
+          |  Download CoreUI
+      li.nav-item
+        a.nav-link.nav-link-danger[href="https://coreui.io/pro/" target="_top"]
+          i.nav-icon.icon-layers
+          |  Try CoreUI 
+          strong
+            | PRO

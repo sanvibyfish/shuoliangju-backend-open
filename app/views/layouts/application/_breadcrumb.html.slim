@@ -1,0 +1,8 @@
+.page-header
+  .row.align-items-center
+    .col-auto
+      .page-title
+        ol.breadcrumb.breadcrumb-arrows[aria-label="breadcrumbs"]
+          - breadcrumb_trail do |crumb|
+            li.breadcrumb-item class="#{current_page?(crumb.path) ? 'active' : ''}"
+              = link_to_unless current_page?(crumb.path), crumb.name, crumb.url, (crumb.current? ? {'aria-current' => 'page'} : {})

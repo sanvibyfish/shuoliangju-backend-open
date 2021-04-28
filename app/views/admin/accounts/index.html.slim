@@ -1,0 +1,59 @@
+.container-fluid
+  .animated.fadeIn
+    .page-header
+      = link_to new_admin_account_path, class: 'btn btn-primary' do 
+        span.glyphicon.glyphicon-plus
+        |  New Account
+      h1
+        | Listing admin_accounts
+    .row
+      .col-lg-12
+        .card
+          .card-header
+            i.fa.fa-align-justify
+            |  Simple Table 
+          .card-body
+            table.table.table-responsive-sm
+              thead
+                tr
+                  th
+                    | Email
+                  th
+                    | Created At
+                  th
+                    | Action
+                  th
+                    | Status
+              tbody
+                - @admin_accounts.each do | account |
+                  tr
+                    td
+                      | #{account.email}
+                    td
+                      | #{account.created_at}
+                    td
+                      | Member
+                    td
+                      = link_to 'Show', admin_account_path(account), class: 'btn btn-sm btn-success'
+                      = link_to 'Edit', edit_admin_account_path(account) ,class: 'btn btn-sm btn-secondary'
+                      = link_to 'Destroy', admin_account_path(account), method: :delete, data: { confirm: 'Are you sure?' } , class: 'btn btn-sm btn-danger'
+                
+            ul.pagination
+              li.page-item
+                a.page-link[href="#"]
+                  | Prev
+              li.page-item.active
+                a.page-link[href="#"]
+                  | 1
+              li.page-item
+                a.page-link[href="#"]
+                  | 2
+              li.page-item
+                a.page-link[href="#"]
+                  | 3
+              li.page-item
+                a.page-link[href="#"]
+                  | 4
+              li.page-item
+                a.page-link[href="#"]
+                  | Next

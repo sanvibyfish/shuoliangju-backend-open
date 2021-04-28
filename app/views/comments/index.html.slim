@@ -1,0 +1,41 @@
+= search_form_for @q, url:app_comments_path, method: 'get', wrapper: :horizontal_form, html: { class: "card" } do |f|
+  .card-body
+    .row
+      .col-2
+        = f.search_field :user_nick_name_cont, required: false, placeholder: "用户昵称", class: "form-control"
+      .col-2
+        = f.input_field :body_cont, required: false, placeholder: "帖子内容", class: "form-control"
+      .col-2
+        = f.input_field :created_at_gt, required: false, placeholder: "开始时间", class: "form-control start_date"
+      .col-2
+        = f.input_field :created_at_lt, required: false, placeholder: "结束时间", class: "form-control end_date"
+      .col-2
+        = f.input :page, as: :hidden, input_html: {value: params[:page]}
+        = f.button :submit, value: "查询", data: { disable_with: "查询中..." }, class: "btn btn-primary"
+.card
+  .table-responsive
+    table.table.card-table.table-vcenter.datatable
+      thead
+        tr
+          th 用户昵称
+          th 回复帖子
+          th 评论内容
+          th 创建时间
+          th 操作
+      tbody
+        - @comments.each do | comment |
+          tr
+            td
+              = comment.user.nick_name
+            td
+              = truncate(comment.commentable.body, :length => 20)
+            td
+              = comment.body
+            td
+              = comment.created_at.strftime('%Y-%m-%d %H:%M')
+            td
+              = link_to '删除',  app_comment_path(@current_app, comment), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-link text-danger'
+  .card-footer.d-flex.align-items-center
+    p.m-0.text-muted
+      | 共计 #{@count}  条
+    = paginate @comments

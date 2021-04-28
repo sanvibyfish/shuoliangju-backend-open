@@ -1,0 +1,21 @@
+# 最大并发数
+concurrency: 5
+
+# 进程和日志的输出位置
+pidfile: tmp/pids/sidekiq.pid
+logfile: log/sidekiq.log
+
+# 任务队列
+queues:
+  - default
+  - mailers
+  - schedule
+
+development:
+  concurrency: 5
+
+staging:
+  concurrency: 10
+
+production:
+  concurrency: 20

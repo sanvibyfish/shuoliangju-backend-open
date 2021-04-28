@@ -1,0 +1,7 @@
+{
+  "editor.tabSize": 2,
+  "formatall.search.include": "**/*.{js,css,vue,html,slim,rb,scss}",
+  "editor.detectIndentation": false,
+  "git.ignoreLimitWarning": true,
+  "docker.defaultRegistryPath": "registry.cn-hangzhou.aliyuncs.com/shuolianju"
+}

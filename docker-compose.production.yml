@@ -1,0 +1,31 @@
+version: '3'
+services:
+  sidekiq-production:
+    image: registry.cn-hangzhou.aliyuncs.com/shuolianju/shuoliangju-backend-production:1.2.3
+    container_name: sidekiq-production
+    env_file:
+      - .env.production
+    network_mode: bridge
+    command: bundle exec sidekiq -C config/sidekiq.yml -e production
+  shuoliangju-backend-production:
+    image: registry.cn-hangzhou.aliyuncs.com/shuolianju/shuoliangju-backend-production:1.2.3
+    container_name: shuoliangju-backend-production
+    command: bundle exec rails s -e production
+    volumes:
+      - /app/log/shuoliangju-backend-production:/app/log
+    ports:
+      - "7001:3000"
+    env_file:
+      - .env.production
+    network_mode: bridge
+  shuoliangju-backend-production-backup:
+    image: registry.cn-hangzhou.aliyuncs.com/shuolianju/shuoliangju-backend-production:1.2.3
+    container_name: shuoliangju-backend-production-backup
+    command: bundle exec rails s -e production
+    volumes:
+      - /app/log/shuoliangju-backend-production-backup:/app/log
+    ports:
+      - "7000:3000"
+    env_file:
+      - .env.production
+    network_mode: bridge

@@ -1,0 +1,39 @@
+| <!doctype html> 
+html[lang="en"]
+  head
+    = csrf_meta_tags
+    = csp_meta_tag
+    meta[charset="utf-8"]
+    meta[name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"]
+    meta[http-equiv="X-UA-Compatible" content="ie=edge"]
+    meta[name="msapplication-TileColor" content="#206bc4"]
+    meta[name="theme-color" content="#206bc4"]
+    meta[name="apple-mobile-web-app-status-bar-style" content="black-translucent"]
+    meta[name="apple-mobile-web-app-capable" content="yes"]
+    meta[name="mobile-web-app-capable" content="yes"]
+    meta[name="HandheldFriendly" content="True"]
+    meta[name="MobileOptimized" content="320"]
+    meta[name="robots" content="noindex,nofollow,noarchive"]
+    link[rel="icon" href="./favicon.ico" type="image/x-icon"]
+    link[rel="shortcut icon" href="./favicon.ico" type="image/x-icon"]
+    title
+      | 说两句-beta
+    = stylesheet_pack_tag 'apps', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_pack_tag 'apps', 'data-turbolinks-track': 'reload'
+    = yield :javascripts
+  body.antialiased
+    .page
+      - if !is_apps_page?(request.fullpath)
+        = render "layouts/sidebar/#{@_sidebar_name}"
+      = render "layouts/application/nav"
+      .content
+        .container
+          = notice_message
+          = render "layouts/application/breadcrumb"
+          = yield
+        .mb-n3.mt-3
+          footer.footer
+            .container
+              .row.align-items-center.flex-row-reverse
+                .col-12.col-lg-auto.mt-3.mt-lg-0.text-center
+                  |  © 2020 Copyright 说两句 沪ICP备20005775号
