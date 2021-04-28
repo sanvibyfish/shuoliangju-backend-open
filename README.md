@@ -11,6 +11,7 @@
 ## 依赖服务
 1. 阿里云OSS
 2. 微信内容审查服务
+3. 小程序前端[https://github.com/sanvibyfish/shuoliangju-client-open](https://github.com/sanvibyfish/shuoliangju-client-open)
 
 ## 如何使用
 
